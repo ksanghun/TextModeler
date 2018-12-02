@@ -103,22 +103,9 @@ void CTextAnalyzerView::OnInitialUpdate()
 
 	CRect cRect;
 	GetWindowRect(&cRect);
-	//cRect.top = 100;
-	//cRect.bottom = 600;
-	//cRect.left=100;
-	//cRect.right = 600;
-
-
-
-
 	m_pDSMImg = new CDSMImg;
 	m_pDSMImg->Create(NULL, NULL, WS_CHILD|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_VISIBLE, cRect, this, 0x01);
 	m_pDSMImg->InitGLview(500, 500);
-
-	//cRect.top = 100;
-	//cRect.bottom = 600;
-	//cRect.left=605;
-	//cRect.right = 1105;
 
 	m_pSphereChart = new SphereChart;
 	m_pSphereChart->Create(NULL, NULL, WS_CHILD|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_VISIBLE, cRect, this, 0x02);
@@ -129,10 +116,11 @@ void CTextAnalyzerView::OnInitialUpdate()
 		int nWidth = m_nScreenWidth/2;
 		m_ctrlEdit.MoveWindow(0, m_nScreenHeight-150, m_nScreenWidth-150, 150);
 		m_ctrlStartBtn.MoveWindow(m_nScreenWidth-150, m_nScreenHeight-150, 150, 150);
-	//	m_pDSMImg->MoveWindow(0, 50, nWidth, m_nScreenHeight-200);
-	//	m_pSphereChart->MoveWindow(nWidth, 50, nWidth, m_nScreenHeight-200);
-		m_pDSMImg->MoveWindow(110, 0, nWidth, m_nScreenHeight-150);
-		m_pSphereChart->MoveWindow(nWidth+110, 0, nWidth-110, m_nScreenHeight-150);
+
+		int lefeWidth = nWidth + 200;
+		int righWidth = m_nScreenWidth - lefeWidth;
+		m_pDSMImg->MoveWindow(110, 0, lefeWidth, m_nScreenHeight - 150);
+		m_pSphereChart->MoveWindow(lefeWidth + 110, 0, righWidth - 110, m_nScreenHeight - 150);
 	}
 
 //	m_ctrlStartBtn.ShowWindow(SW_HIDE);
@@ -179,12 +167,15 @@ void CTextAnalyzerView::OnSize(UINT nType, int cx, int cy)
 
 	if((m_pDSMImg!=0)&&(m_pSphereChart!=0))
 	{
-		int nWidth = m_nScreenWidth/2;
+		int nWidth = m_nScreenWidth / 2;
 		m_ctrlEdit.MoveWindow(0, m_nScreenHeight-150, m_nScreenWidth-150, 150);
 		m_ctrlStartBtn.MoveWindow(m_nScreenWidth-150, m_nScreenHeight-150, 150, 150);
 	
-		m_pDSMImg->MoveWindow(110, 0, nWidth, m_nScreenHeight-150);
-		m_pSphereChart->MoveWindow(nWidth+110, 0, nWidth-110, m_nScreenHeight-150);
+		
+		int lefeWidth = nWidth + 200;
+		int righWidth = m_nScreenWidth - lefeWidth;
+		m_pDSMImg->MoveWindow(110, 0, lefeWidth , m_nScreenHeight-150);
+		m_pSphereChart->MoveWindow(lefeWidth +110, 0, righWidth -110, m_nScreenHeight-150);
 
 		
 	}
