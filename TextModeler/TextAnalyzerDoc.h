@@ -1,15 +1,16 @@
 
-// MainFrm.h : interface of the CMainFrame class
+// TextAnalyzerDoc.h : interface of the CTextAnalyzerDoc class
 //
+
 
 #pragma once
 
-class CMainFrame : public CFrameWnd
+
+class CTextAnalyzerDoc : public CDocument
 {
-	
 protected: // create from serialization only
-	CMainFrame();
-	DECLARE_DYNCREATE(CMainFrame)
+	CTextAnalyzerDoc();
+	DECLARE_DYNCREATE(CTextAnalyzerDoc)
 
 // Attributes
 public:
@@ -19,21 +20,22 @@ public:
 
 // Overrides
 public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL OnNewDocument();
+	virtual void Serialize(CArchive& ar);
 
 // Implementation
 public:
-	virtual ~CMainFrame();
+	virtual ~CTextAnalyzerDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
+protected:
 
 // Generated message map functions
 protected:
 	DECLARE_MESSAGE_MAP()
-
 };
 
 

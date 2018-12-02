@@ -5,6 +5,10 @@
 
 #pragma once
 
+#ifndef _SECURE_ATL
+#define _SECURE_ATL 1
+#endif
+
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
 #endif
@@ -20,7 +24,6 @@
 #include <afxext.h>         // MFC extensions
 
 
-#include <afxdisp.h>        // MFC Automation classes
 
 
 
@@ -31,24 +34,44 @@
 #include <afxcmn.h>             // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
-#include <afxcontrolbars.h>     // MFC support for ribbons and control bars
+//#include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 
 
+#include <gl/gl.h>
+#include <gl/GLU.h>
+//#include <gl/glaux.h>
 
 
+#pragma comment( lib, "opengl32.lib" )									// Search For OpenGL32.lib While Linking
+#pragma comment( lib, "glu32.lib" )	
+//#pragma comment( lib, "glaux.lib" )
 
+#include <vector>
+#include <map>
+#include <algorithm>
+#include <math.h>
+#include <functional>
 
+class CTextAnalyzerView;
+extern CTextAnalyzerView* pView;
 
+#define _CRT_SECURE_NO_WARNINGS
 
 #ifdef _UNICODE
 #if defined _M_IX86
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_IA64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ia64' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #elif defined _M_X64
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #else
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 #endif
+
+HPALETTE gl_GetPalette(HDC inhDC);
+HRESULT gl_GetBitFont(CDC *cDCPtr, LOGFONT *LFont, CString strContent, BITMAP *bitmap, BITMAPINFO *m_pBmpInfo);
+
 
 
