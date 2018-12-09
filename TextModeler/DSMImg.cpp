@@ -32,16 +32,16 @@ CDSMImg::CDSMImg()
 	m_pChartData = 0;
 
 	memset(&m_LogFont, 0, sizeof(m_LogFont));
-	strcpy((char*)m_LogFont.lfFaceName, "Simhei");
+	strcpy((char*)m_LogFont.lfFaceName, "Arial");
 	m_LogFont.lfCharSet = ANSI_CHARSET;
-	m_LogFont.lfHeight = -14;
+	m_LogFont.lfHeight = -18;
 	m_LogFont.lfWidth = 0;
 	//	m_LogFont.lfWeight = FW_BOLD;
 
 	memset(&m_LogFontB, 0, sizeof(m_LogFontB));
-	strcpy((char*)m_LogFont.lfFaceName, "µ¸¿ò");
+	strcpy((char*)m_LogFontB.lfFaceName, "Arial");
 	m_LogFontB.lfCharSet = ANSI_CHARSET;
-	m_LogFontB.lfHeight = -14;
+	m_LogFontB.lfHeight = -18;
 	m_LogFontB.lfWidth = 0;
 	m_LogFontB.lfWeight = FW_BOLD;
 
@@ -1383,29 +1383,37 @@ void CDSMImg::DrawTreeText(CCharTreeObject* pTree)
 
 
 		glColor4f(0.99f, 0.99f, 0.99f, 0.9f);
-		for(int i=1; i<pTree->m_forwardTree.size(); i++)
-		{			
-			pTreeNode = pTree->m_forwardTree[i];			
+		for (int i = 1; i < pTree->m_forwardTree.size(); i++)
+		{
+			pTreeNode = pTree->m_forwardTree[i];
 			if((pTreeNode->nCode!=32)&&(pTreeNode->nChildCnt==0))
 			{
 				mtSetPoint3D(&tPos, pTreeNode->vPos.x, pTreeNode->vPos.z, pTreeNode->vPos.y);
 				strChar = m_pChartData->m_pArrayHChar[pTreeNode->nCode].m_strName;
 				gl_DrawText(tPos, strChar, m_LogFont, 1, m_pBmpInfo, m_CDCPtr);
-			}					
+				//	}					
+			}
 		}
 
-		//for(int i=1; i<pTree->m_backwardTree.size(); i++)
-		//{
-		//	pTreeNode = pTree->m_backwardTree[i];				
-		//	if(pTreeNode->nCode!=32)
-		//	{
-		//		// 				tPos = pTreeNode->vPos;
-		//		// 				tPos.y = -tPos.y;
-		//		mtSetPoint3D(&tPos, pTreeNode->vPos.x, pTreeNode->vPos.z, pTreeNode->vPos.y);
-		//		strChar = m_pChartData->m_pArrayHChar[pTreeNode->nCode].m_strName;
-		//		gl_DrawText(tPos, strChar, m_LogFont, 1, m_pBmpInfo, m_CDCPtr);
-		//	}					
-		//}		
+		glColor4f(0.99f, 0.99f, 0.0f, 0.9f);
+		for (int i = 1; i < pTree->m_backwardTree.size(); i++)
+		{
+			pTreeNode = pTree->m_backwardTree[i];
+			if ((pTreeNode->nCode != 32) && (pTreeNode->nChildCnt == 0)) {
+				mtSetPoint3D(&tPos, pTreeNode->vPos.x, pTreeNode->vPos.z, pTreeNode->vPos.y);
+				strChar = m_pChartData->m_pArrayHChar[pTreeNode->nCode].m_strName;
+				gl_DrawText(tPos, strChar, m_LogFont, 1, m_pBmpInfo, m_CDCPtr);
+			}
+		}
+
+
+		glColor4f(0.99f, 0.0f, 0.0f, 0.9f);
+		if (pTree->m_backwardTree.size() > 0) {
+			pTreeNode = pTree->m_backwardTree[0];
+			mtSetPoint3D(&tPos, pTreeNode->vPos.x, pTreeNode->vPos.z, pTreeNode->vPos.y);
+			strChar = m_pChartData->m_pArrayHChar[pTreeNode->nCode].m_strName;
+			gl_DrawText(tPos, strChar, m_LogFontB, 1, m_pBmpInfo, m_CDCPtr);
+		}
 	}
 
 	glPopMatrix();

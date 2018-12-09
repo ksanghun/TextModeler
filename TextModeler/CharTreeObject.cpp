@@ -257,15 +257,16 @@ void CCharTreeObject::DrawTreeNode(float fScale, float fAlpha)
 		fScale = 1.0f;
 
 	//int iSizeB = (int)(15.0f*fScale);
-	int iSizeS = (int)(8.0f*fScale);
+	//int iSizeS = (int)(8.0f*fScale);
 	//int iSizeO = iSizeB+2;
 
+	int iSizeS = 1;
 	int nNodeSize=1;
 
 //	if(m_pCharData)
 	{
 
-		float fTotal = m_nTotalCnt;
+//		float fTotal = m_nTotalCnt;
 
 
 		_CHAR_TREE* pTreeNode;
@@ -277,9 +278,12 @@ void CCharTreeObject::DrawTreeNode(float fScale, float fAlpha)
 		{
 
 			pTreeNode = m_forwardTree[i];	
-			nNodeSize = (float)pTreeNode->nCnt*500 / fTotal;
-			if(nNodeSize<8)
+	//		nNodeSize = (float)pTreeNode->nCnt*500 / fTotal;
+	//		if(nNodeSize<8)
 				nNodeSize = 8;
+	//		if (nNodeSize > 15)
+	//			nNodeSize = 15;
+			
 
 			glPointSize(nNodeSize);
 
